@@ -1,7 +1,7 @@
 ### 💻 &nbsp;About Me
 
 - 🎉 &nbsp; December 31, 2004 (19 y/o)
-- 🏠 &nbsp; Living in Berlin, Germany
+- 💼 &nbsp; Axel Springer SE 
 
 <br><br>
 <a href="https://discord.skillcode.dev">
