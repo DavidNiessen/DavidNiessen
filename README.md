@@ -22,15 +22,15 @@
 <tr border="0">
 <td width="50%" align="center">
 
-  <img  align="center"  src="https://github-readme-stats.vercel.app/api?username=zskillcode&theme=nightowl&show_icons=true&count_private=true&hide_border=true" />
+  <img  align="center"  src="https://github-readme-stats.vercel.app/api?username=davidniessen&theme=nightowl&show_icons=true&count_private=true&hide_border=true" />
   <br></br>
-  <img  title="🔥 Get streak stats for your profile at git.io/streak-stats" alt="Mark streak" src="https://github-readme-streak-stats.herokuapp.com/?user=zskillcode&theme=nightowl&hide_border=true" />
+  <img  title="🔥 Get streak stats for your profile at git.io/streak-stats" alt="Mark streak" src="https://github-readme-streak-stats.herokuapp.com/?user=davidniessen&theme=nightowl&hide_border=true" />
 
 </td>
 
 <td width="50%" align="center">
 
-  <img  align="center"  src="https://github-readme-stats.anuraghazra1.vercel.app/api/top-langs/?username=zskillcode&theme=nightowl&hide_border=true&no-bg=true&no-frame=true&langs_count=10"/>
+  <img  align="center"  src="https://github-readme-stats.anuraghazra1.vercel.app/api/top-langs/?username=davidniessen&theme=nightowl&hide_border=true&no-bg=true&no-frame=true&langs_count=10"/>
 
   </td>
 </tr>
@@ -45,7 +45,7 @@
 <p align="center">
 <div align=center>
   <a href="https://github.com/ryo-ma/github-profile-trophy" title="Go to Source">
-      <img align="center" width=100% src="https://github-profile-trophy.vercel.app/?username=zskillcode&theme=radical&margin-h=15&margin-w=5&no-bg=true" alt="TROPHY" />
+      <img align="center" width=100% src="https://github-profile-trophy.vercel.app/?username=davidniessen&theme=radical&margin-h=15&margin-w=5&no-bg=true" alt="TROPHY" />
     </a>
 </div>
 </p>
@@ -71,7 +71,7 @@
 <a href="https://www.youtube.com/channel/UCF0CrBkKgyGuM9ASbANBuGw" target="_blank">
   <img align="center" alt="YT" width="40px" src="https://img.icons8.com/color/100/000000/youtube-play.png" />
 </a> &nbsp;&nbsp;
-<a href="https://www.twitch.tv/zskillcode" >
+<a href="https://www.twitch.tv/davidniessen" >
   <img align="center" alt="Twitch" width="40px" src="https://img.icons8.com/color/96/000000/twitch--v2.png" />
 </a> &nbsp;&nbsp;
 <p>
@@ -84,7 +84,7 @@
 
 <!-- retro visitor counter -->
 <p align="center" >   
-  <img src="https://profile-counter.glitch.me/zskillcode/count.svg" />  
+  <img src="https://profile-counter.glitch.me/davidniessen/count.svg" />  
 </p>
 <br>
   <p align="center">
