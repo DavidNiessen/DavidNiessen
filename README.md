@@ -17,7 +17,7 @@ data class David(
 )
 ```
 
-# 💻Tech Stack <img src = "https://media2.giphy.com/media/QssGEmpkyEOhBCb7e1/giphy.gif?cid=ecf05e47a0n3gi1bfqntqmob8g9aid1oyj2wr3ds3mg700bl&rid=giphy.gif" width = 32px>
+# 💻Tech Stack <a href="#"><img src = "https://media2.giphy.com/media/QssGEmpkyEOhBCb7e1/giphy.gif?cid=ecf05e47a0n3gi1bfqntqmob8g9aid1oyj2wr3ds3mg700bl&rid=giphy.gif" width = 32px></a>
 
 <!-- https://skillicons.dev -->
 ```kt
@@ -42,7 +42,7 @@ val sectionName = "TOOLS"
 <p>
 <p align="center">
   <!-- https://platane.me/snk/ -->
-  <img src="https://github.com/DavidNiessen/DavidNiessen/blob/output/github-contribution-grid-snake-dark.svg" alt="snake">
+  <a href="#"><img src="https://github.com/DavidNiessen/DavidNiessen/blob/output/github-contribution-grid-snake-dark.svg" alt="snake"></a>
 
 </p>
 
