@@ -14,21 +14,18 @@
 ![Adobe Illustrator](https://img.shields.io/badge/adobeillustrator-%23FF9A00.svg?style=for-the-badge&logo=adobeillustrator&logoColor=white) ![Adobe Photoshop](https://img.shields.io/badge/adobephotoshop-%2331A8FF.svg?style=for-the-badge&logo=adobephotoshop&logoColor=white)![Figma](https://img.shields.io/badge/figma-black.svg?style=for-the-badge&logo=figma&logoColor=red) ![Canva](https://img.shields.io/badge/Canva-%2300C4CC.svg?style=for-the-badge&logo=Canva&logoColor=white) ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
 
 <div align="center">
-  <h3><b>Let's get in touch! </b></h3>
+  <h3><b>Socials</b></h3>
   </div>
 <p align="center">
-<a href="https://www.linkedin.com/in/stefanos-stamoulis/" target="_blank">
-  <img align="center" alt="Stefanos Stamoulis | Linkedin" width="24px" src="https://github.com/SatYu26/SatYu26/blob/master/Assets/Linkedin.svg" />
+<a href="https://discord.skillcode.dev" target="_blank">
+  <img align="center" alt="Discord" width="32px" src="https://github.com/DavidNiessen/DavidNiessen/blob/master/assets/svg/discord.svg" />
 </a> &nbsp;&nbsp;
-<a href="https://www.instagram.com/steve.frontdev/" target="_blank">
-  <img align="center" alt="Stefanos Stamoulis | Instagram" width="24px" src="https://github.com/SatYu26/SatYu26/blob/master/Assets/Instagram.svg" />
-</a> &nbsp;&nbsp;
-<a href="mailto:sstamoulis.wd@gmail.com" >
-  <img align="center" alt="Stefanos Stamoulis | Gmail" width="26px" src="https://github.com/SatYu26/SatYu26/blob/master/Assets/Gmail.svg" />
-</a> &nbsp;&nbsp;
+	
 <p>
 <p align="center">
-  <img src="https://github.com/StefanosSt/StefanosSt/blob/main/github-user-contribution.svg" alt="snake">
+  <!-- https://platane.me/snk/ -->
+  <img src="https://github.com/DavidNiessen/DavidNiessen/blob/output/github-contribution-grid-snake-dark.svg" alt="snake">
+
 </p>
 
 ---
