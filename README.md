@@ -8,6 +8,15 @@
 	</a>
 </p>
 
+```kt
+data class David(
+	val name = "David Niessen",
+	val age: 19,
+	val birthday = LocalDate.of(2004, 12, 31),
+	val company = "Axel Springer SE"
+)
+```
+
 # 💻Tech Stack <img src = "https://media2.giphy.com/media/QssGEmpkyEOhBCb7e1/giphy.gif?cid=ecf05e47a0n3gi1bfqntqmob8g9aid1oyj2wr3ds3mg700bl&rid=giphy.gif" width = 32px>
 
 <!-- https://skillicons.dev -->
@@ -18,17 +27,17 @@ val sectionName = "MAIN_LANGUAGES"
 ```kt
 val sectionName = "LIBRARIES/FRAMEWORKS"
 ```
-[![Libraries](https://skillicons.dev/icons?i=spring,hibernate,react,redux,mongodb,mysql,postgres,h2,sqlite,elasticsearch,sass)](#)
+[![Libraries](https://skillicons.dev/icons?i=spring,hibernate,react,redux,mongodb,mysql,postgres,sqlite,elasticsearch,sass)](#)
 ```kt
 val sectionName = "TOOLS"
 ```
 [![Tools](https://skillicons.dev/icons?i=idea,phpstorm,aws,cloudflare,git,github,githubactions,jenkins,gradle,maven,npm,pnpm,vite,nginx)](#)
 
 <div align="center">
-  <h3><b>Socials</b></h3>
+  <h1><b>Socials</b></h1>
   </div>
 <p align="center">
-<a href="https://discord.skillcode.dev" target="_blank"><img align="center" alt="Discord" width="32px" src="https://github.com/DavidNiessen/DavidNiessen/blob/master/assets/svg/discord.svg" /></a>
+<a href="https://discord.skillcode.dev" target="_blank"><img align="center" src="https://skillicons.dev/icons?i=discord" /></a>
 	
 <p>
 <p align="center">
