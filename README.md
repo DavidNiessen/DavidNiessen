@@ -1,6 +1,6 @@
 <h1 align="center"> Hi, I'm David <img src = "https://raw.githubusercontent.com/MartinHeinz/MartinHeinz/master/wave.gif" width = 30px></h1>
 
-<a href="#"><img src="https://github.com/StefanosSt/StefanosSt/blob/main/Group%203.png"/></a>
+<a href="#"><img src="https://github.com/DavidNiessen/DavidNiessen/blob/master/assets/svg/banner.svg"/></a>
 
 <p align="center">
 	<a href="#">
