@@ -1,4 +1,4 @@
-<h1 align="center"> Hi, I'm David <img src = "https://raw.githubusercontent.com/MartinHeinz/MartinHeinz/master/wave.gif" width = 30px></h1>
+<h1 align="center"> Hi, I'm David <a href="#"><img src = "https://raw.githubusercontent.com/MartinHeinz/MartinHeinz/master/wave.gif" width = 30px><a/></h1>
 
 <a href="#"><img src="https://github.com/DavidNiessen/DavidNiessen/blob/master/assets/svg/Group%207.png"/></a>
 
