@@ -11,7 +11,7 @@
 ```kt
 data class David(
 	val name = "David Niessen",
-	val age = 19,
+	val age = 20,
 	val birthday = LocalDate.of(2004, 12, 31),
 	val company = "Axel Springer SE"
 )
