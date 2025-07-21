@@ -4,7 +4,7 @@
 
 <p align="center">
 	<a href="#">
-		<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=28&pause=1000&width=435&lines=Backend+Developer;Kotlin+%7C+Java;Spring+Framework&center=true">
+		<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=28&pause=1000&width=435&lines=Backend+Developer;Kotlin+%7C+Java;Spring&center=true">
 	</a>
 </p>
 
@@ -23,15 +23,15 @@ data class David(
 ```kt
 val sectionName = "MAIN_LANGUAGES"
 ```
-[![Main Languages](https://skillicons.dev/icons?i=kotlin,java,js,ts,html,css)](#)
+[![Main Languages](https://skillicons.dev/icons?i=kotlin,java)](#)
 ```kt
-val sectionName = "LIBRARIES/FRAMEWORKS"
+val sectionName = "MAIN_FRAMEWORK"
 ```
-[![Libraries](https://skillicons.dev/icons?i=spring,hibernate,react,redux,mongodb,mysql,postgres,sqlite,elasticsearch,sass)](#)
+[![Libraries](https://skillicons.dev/icons?i=spring)](#)
 ```kt
-val sectionName = "TOOLS"
+val sectionName = "MAIN_TOOLS"
 ```
-[![Tools](https://skillicons.dev/icons?i=idea,phpstorm,aws,cloudflare,git,github,githubactions,jenkins,gradle,maven,npm,pnpm,vite,nginx)](#)
+[![Tools](https://skillicons.dev/icons?i=hibernate,mongo,mysql,grafana,aws,kubernetes,cloudflare,git,github,githubactions,jenkins,gradle,maven,idea)](#)
 
 <div align="center">
   <h1><b>Socials</b></h1>
