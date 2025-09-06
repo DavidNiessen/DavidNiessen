@@ -37,7 +37,7 @@ val sectionName = "MAIN_TOOLS"
   <h1><b>Socials</b></h1>
   </div>
 <p align="center">
-<a href="https://discord.skillcode.dev" target="_blank"><img align="center" src="https://skillicons.dev/icons?i=discord" /></a>
+<a href="https://www.linkedin.com/in/dniessen/" target="_blank"><img align="center" src="https://skillicons.dev/icons?i=linkedin" /></a>
 	
 <p>
 <p align="center">
