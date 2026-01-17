@@ -5,7 +5,7 @@
 ```kt
 data class David(
 	val name = "David Niessen",
-	val age = 20,
+	val age = 21,
 	val birthday = LocalDate.of(2004, 12, 31),
 	val company = "Axel Springer SE"
 )
