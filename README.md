@@ -30,8 +30,7 @@ data class David(
 
 <div align="center">
 
-<img src="https://skillicons.dev/icons?i=kotlin,java,spring,docker,kubernetes,aws,postgres,linux&theme=dark" />
-
+[![](https://skillicons.dev/icons?i=kotlin,java,spring,docker,kubernetes,aws,postgres,linux&theme=dark)](#)
 </div>
 
 <br>
