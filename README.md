@@ -35,10 +35,6 @@ data class David(
 
 <br>
 
-<img src="https://github-readme-activity-graph.vercel.app/graph?username=DavidNiessen&theme=github-compact&hide_border=true"/>
-
-<br>
-
 <p align="center">
   <img src="https://github.com/DavidNiessen/DavidNiessen/blob/output/github-contribution-grid-snake-dark.svg" />
 </p>
