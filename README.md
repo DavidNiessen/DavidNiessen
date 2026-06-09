@@ -12,6 +12,9 @@
 <a href="https://www.linkedin.com/in/dniessen/">
   <img src="https://skillicons.dev/icons?i=linkedin" />
 </a>
+<a href="https://www.instagram.com/david_niessen/">
+  <img src="https://skillicons.dev/icons?i=instagram" />
+</a>
 
 </div>
 
