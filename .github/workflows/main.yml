@@ -28,7 +28,7 @@ jobs:
         with:
           github_user_name: ${{ github.repository_owner }}
           outputs: |
-            dist/github-contribution-grid-snake-dark.svg?color_snake=#0ac740&color_dots=#1e1e20,#55555a,#8b8b8f,#c1c1c4,#fafafa
+            dist/github-contribution-grid-snake-dark.svg?color_snake=#7c3aed&color_dots=#1e1e20,#55555a,#8b8b8f,#c1c1c4,#fafafa
 
       - name: Shift snake 18px left
         run: |
