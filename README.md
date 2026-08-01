@@ -1,6 +1,6 @@
-<p align="left">
+<a href="#" align="left">
   <img alt="header" src="https://shieldcn.dev/header/dots.svg?title=David+Niessen&amp;subtitle=Backend+Engineer+-+building+scalable%2C+cloud-native+systems.&amp;logo=kotlin&amp;logoColor=7c3aed&amp;mode=dark&amp;align=left&amp;font=jetbrains-mono" />
-</p>
+</a>
 
 [![Custom badge](https://shieldcn.dev/badge/age-21.svg?size=xs&logo=ri%3AFaBirthdayCake&color=fafafa)](#)
 [![Custom badge](https://shieldcn.dev/badge/birthday-31.12.2004.svg?size=xs&logo=ri%3AFaBirthdayCake&color=fafafa)](#)
