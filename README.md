@@ -1,6 +1,6 @@
 <a href="#">
   <p align="left">
-    <img alt="header" src="https://shieldcn.dev/header/dots.svg?title=David+Niessen&amp;subtitle=Backend+Engineer+-+building+scalable%2C+cloud-native+systems.&amp;logo=kotlin&amp;logoColor=red&amp;mode=dark&amp;align=left&amp;font=jetbrains-mono" />
+    <img alt="header" src="https://shieldcn.dev/header/dots.svg?title=David+Niessen&amp;subtitle=Software+Engineer+-+building+scalable%2C+cloud-native+systems.&amp;logo=kotlin&amp;logoColor=red&amp;mode=dark&amp;align=left&amp;font=jetbrains-mono" />
   </p>
 </a>
 
