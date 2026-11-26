@@ -95,11 +95,6 @@ export const hero: SvgWidget = {
 </g>
 <rect x="0.5" y="0.5" width="${W - 1}" height="${H - 1}" rx="16" stroke="${t.border}"/>
 
-<g class="in" style="animation-delay:.1s">
-  <rect x="48" y="40" width="148" height="24" rx="12" fill="${t.raised}" stroke="${t.border}"/>
-  <circle cx="64" cy="52" r="4" fill="#22c55e"/><circle cx="64" cy="52" r="4" fill="#22c55e" class="loop" style="animation:pulse 1.6s ease-in-out infinite" filter="url(#glow)"/>
-  <text x="76" y="56.5" font-size="11.5" class="m">hello, world_</text>
-</g>
 
 <text x="48" y="122" font-size="${nameSize}" class="name b" letter-spacing="-1">${esc(name)}</text>
 <g class="gl loop" clip-path="url(#sliceA)"><text x="48" y="122" font-size="${nameSize}" class="b" fill="${t.accent}" letter-spacing="-1">${esc(name)}</text></g>
