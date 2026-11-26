@@ -1,4 +1,5 @@
 import { esc, groupDigits } from "../lib/escape.js";
+import { niceDate } from "./contrib.js";
 import { svgFramesToGif } from "../lib/raster.js";
 import type { Theme } from "../theme.js";
 import type { Ctx, GifWidget } from "./types.js";
@@ -23,7 +24,7 @@ export interface Fit {
 }
 
 /** One frame of the isometric contribution city, rotated by `angle` radians. */
-export function skylineFrame(t: Theme, weeks: { count: number; level: number }[][], angle: number, title: string, sub: string, fit: Fit = { scale: 1, ox: 0, oy: 0 }): { svg: string; bounds: [number, number, number, number] } {
+export function skylineFrame(t: Theme, weeks: { count: number; level: number }[][], angle: number, total: string, best: string, fit: Fit = { scale: 1, ox: 0, oy: 0 }): { svg: string; bounds: [number, number, number, number] } {
   const cols = weeks.length;
   const max = Math.max(1, ...weeks.flat().map((d) => d.count));
   const unit = 13;
@@ -78,6 +79,11 @@ export function skylineFrame(t: Theme, weeks: { count: number; level: number }[]
     }),
   );
   faces.sort((a, b) => b.d - a.d);
+  const m = unit * 0.6;
+  const plate = ([[-m, -m], [cols * unit + m, -m], [cols * unit + m, 7 * unit + m], [-m, 7 * unit + m]] as [number, number][])
+    .map(([x, z]) => project([x, -0.5, z]))
+    .map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`)
+    .join(" ");
   const bounds: [number, number, number, number] = [Infinity, Infinity, -Infinity, -Infinity];
   for (const f of faces) {
     for (const pt of f.pts.split(" ")) {
@@ -88,12 +94,19 @@ export function skylineFrame(t: Theme, weeks: { count: number; level: number }[]
       bounds[3] = Math.max(bounds[3], y);
     }
   }
+  const legend = t.heat.map((c, i) => `<rect x="${W - 132 + i * 14}" y="${H - 28}" width="11" height="11" rx="2.5" fill="${c}"/>`).join("");
+  const font = 'font-family="JetBrains Mono"';
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
+<defs><pattern id="dots" width="16" height="16" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="${t.subtle}" opacity="${t.name === "dark" ? 0.55 : 0.8}"/></pattern></defs>
 <rect x=".5" y=".5" width="${W - 1}" height="${H - 1}" rx="12" fill="${t.card}" stroke="${t.border}"/>
+<rect x=".5" y=".5" width="${W - 1}" height="${H - 1}" rx="12" fill="url(#dots)" opacity=".5"/>
 <circle cx="28" cy="26" r="4" fill="${t.accent}"/>
-<text x="40" y="30" font-family="JetBrains Mono" font-weight="700" font-size="12" letter-spacing="2" fill="${t.muted}">${esc(title)}</text>
-<text x="${W - 24}" y="30" font-family="JetBrains Mono" font-size="11" text-anchor="end" fill="${t.muted}">${esc(sub)}</text>
+<text x="40" y="30" ${font} font-weight="700" font-size="12" letter-spacing="2" fill="${t.muted}">3D SKYLINE · LAST 12 MONTHS</text>
+<text x="${W - 24}" y="30" ${font} font-size="12" text-anchor="end" fill="${t.muted}"><tspan fill="${t.text}" font-weight="700" font-size="14">${esc(total)}</tspan> contributions · 1 tower = 1 day</text>
+<polygon points="${plate}" fill="${t.raised}" stroke="${t.border}"/>
 ${faces.map((f) => `<polygon points="${f.pts}" fill="${f.fill}" stroke="${f.fill}" stroke-width=".6" stroke-linejoin="round"/>`).join("")}
+<text x="24" y="${H - 18.5}" ${font} font-size="10.5" fill="${t.muted}">${esc(best)}</text>
+<text x="${W - 140}" y="${H - 18.5}" ${font} font-size="10.5" text-anchor="end" fill="${t.muted}">less</text>${legend}<text x="${W - 58}" y="${H - 18.5}" ${font} font-size="10.5" fill="${t.muted}">more</text>
 </svg>`;
   return { svg, bounds };
 }
@@ -104,10 +117,11 @@ export function fitAll(boundsList: [number, number, number, number][]): Fit {
     (a, b) => [Math.min(a[0], b[0]), Math.min(a[1], b[1]), Math.max(a[2], b[2]), Math.max(a[3], b[3])],
     [Infinity, Infinity, -Infinity, -Infinity],
   );
-  const top = 52;
-  const pad = 18;
-  const scale = Math.min((W - pad * 2) / (x1 - x0), (H - top - pad) / (y1 - y0));
-  return { scale, ox: W / 2 - (scale * (x0 + x1)) / 2, oy: top + (H - top - pad) / 2 - (scale * (y0 + y1)) / 2 };
+  const top = 56;
+  const bottom = 44;
+  const pad = 24;
+  const scale = Math.min((W - pad * 2) / (x1 - x0), (H - top - bottom) / (y1 - y0));
+  return { scale, ox: W / 2 - (scale * (x0 + x1)) / 2, oy: top + (H - top - bottom) / 2 - (scale * (y0 + y1)) / 2 };
 }
 
 export const skyline: GifWidget = {
@@ -116,10 +130,12 @@ export const skyline: GifWidget = {
   alt: "3D contribution skyline",
   render(ctx: Ctx) {
     const weeks = ctx.data.weeks.slice(-53);
-    const sub = `${groupDigits(ctx.data.lastYearTotal).replace(/ /g, " ")} contributions`;
+    const total = groupDigits(ctx.data.lastYearTotal).replace(/\u2009/g, " ");
+    const b = ctx.d.best;
+    const best = b && b.count ? `tallest tower · ${b.count} on ${niceDate(b.date)}` : "";
     const angles = Array.from({ length: FRAMES }, (_, i) => (i / FRAMES) * Math.PI * 2 + 0.5);
-    const fit = fitAll(angles.map((a) => skylineFrame(ctx.theme, weeks, a, "", "").bounds));
-    const frames = angles.map((a) => ({ svg: skylineFrame(ctx.theme, weeks, a, "3D SKYLINE", sub, fit).svg, delay: DELAY }));
+    const fit = fitAll(angles.map((a) => skylineFrame(ctx.theme, weeks, a, total, best).bounds));
+    const frames = angles.map((a) => ({ svg: skylineFrame(ctx.theme, weeks, a, total, best, fit).svg, delay: DELAY }));
     return svgFramesToGif(frames);
   },
 };

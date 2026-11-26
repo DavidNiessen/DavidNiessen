@@ -10,7 +10,7 @@ const STEP = 14;
 const GX = 58;
 const GY = 70;
 
-function niceDate(iso: string): string {
+export function niceDate(iso: string): string {
   const [, m, d] = iso.split("-").map(Number);
   return `${monthName(m)} ${d}`;
 }
