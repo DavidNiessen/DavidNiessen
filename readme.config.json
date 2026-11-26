@@ -1,0 +1,596 @@
+{
+  "$schema": "https://readme.niessen.dev/schema.json",
+  "version": 1,
+  "kind": "profile",
+  "profile": {
+    "login": "DavidNiessen",
+    "name": "David Nießen",
+    "roles": [
+      "Software Engineer",
+      "building cloud-native systems",
+      "Kotlin & Spring on the JVM",
+      "Kubernetes on AWS",
+      "shipping with GitHub Actions"
+    ],
+    "bio": "",
+    "company": "Axel Springer SE",
+    "pronouns": "",
+    "birthday": "2004-12-31",
+    "location": {
+      "city": "Berlin",
+      "latitude": 52.52,
+      "longitude": 13.405,
+      "timezone": "Europe/Berlin"
+    },
+    "links": [
+      {
+        "icon": "linkedin",
+        "label": "LinkedIn",
+        "url": "https://niessen.dev/in",
+        "handle": "niessen.dev/in"
+      },
+      {
+        "icon": "instagram",
+        "label": "Instagram",
+        "url": "https://niessen.dev/ig",
+        "handle": "niessen.dev/ig"
+      },
+      {
+        "icon": "website",
+        "label": "Website",
+        "url": "https://niessen.dev",
+        "handle": "niessen.dev"
+      },
+      {
+        "icon": "github",
+        "label": "GitHub",
+        "url": "https://github.com/DavidNiessen",
+        "handle": "@DavidNiessen"
+      }
+    ]
+  },
+  "project": {
+    "repo": "octocat/aurora",
+    "name": "",
+    "tagline": "A tiny, fast design-token compiler for multi-brand UI kits.",
+    "logo": "",
+    "homepage": "",
+    "packages": {
+      "npm": "",
+      "pypi": "",
+      "crates": ""
+    }
+  },
+  "theme": {
+    "preset": "crimson",
+    "overrides": {},
+    "font": "jetbrains-mono",
+    "headingFont": "jetbrains-mono",
+    "radius": 12,
+    "border": 1,
+    "texture": "dots",
+    "motion": "full",
+    "surface": true
+  },
+  "layout": [
+    {
+      "id": "rx8xr6gk1",
+      "align": "center",
+      "blocks": [
+        {
+          "id": "hero",
+          "type": "hero",
+          "options": {
+            "title": "",
+            "typewriter": true,
+            "greeting": true,
+            "emblem": "github",
+            "emblemStyle": "orbit",
+            "glitch": true,
+            "scanline": true,
+            "glow": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "rx8xr6382",
+      "align": "center",
+      "blocks": [
+        {
+          "id": "socials",
+          "type": "socials",
+          "options": {
+            "style": "pill",
+            "iconColor": "accent",
+            "runner": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "rx8xs1se3",
+      "align": "center",
+      "blocks": [
+        {
+          "id": "divider",
+          "type": "divider",
+          "options": {
+            "style": "comet",
+            "ornament": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "rx8xs4dv4",
+      "align": "center",
+      "blocks": [
+        {
+          "id": "terminal",
+          "type": "terminal",
+          "options": {
+            "title": "",
+            "prompt": "arrow",
+            "cwd": "~",
+            "commands": [
+              {
+                "cmd": "whoami",
+                "output": "{b}{name|lower}{/}{?{m} — {role|lower}?}{?{m} @ {a}{b}{company}?}"
+              },
+              {
+                "cmd": "cat profile.json",
+                "output": "{m}{ {a}\"login\"{m}: {s}\"{login}\"{m}{?, {a}\"based\"{m}: {s}\"{city}\"?}{?{m}, {a}\"pronouns\"{m}: {s}\"{pronouns}\"?}{?{m}, {a}\"age\"{m}: {n}{age}?}{m},\n{m}  {a}\"repos\"{m}: {n}{repos}{m}, {a}\"followers\"{m}: {n}{followers}{m}, {a}\"streak\"{m}: {n}{streak}{m}, {a}\"coffee\"{m}: {n}Infinity{m} }"
+              },
+              {
+                "cmd": "uptime",
+                "output": "{?{m}up {n}{b}{uptime_days}{/}{m} days  ·  ?}{?{t}{uptime_note}{m}  ·  ?}{m}{year} is {t}{year_pct}%{m} done"
+              },
+              {
+                "cmd": "ls ~/stack",
+                "output": "{stack}"
+              }
+            ],
+            "stack": [
+              "kotlin",
+              "java",
+              "spring",
+              "junit",
+              "aws",
+              "k8s",
+              "gh-actions",
+              "mongodb",
+              "typescript",
+              "react",
+              "playwright"
+            ],
+            "chrome": true,
+            "statusBar": true,
+            "tab": "[{login}] 0:zsh*",
+            "status": "git:main  ·  {followers} followers  ·  {clock}"
+          }
+        }
+      ]
+    },
+    {
+      "id": "rx8xs4bu5",
+      "align": "center",
+      "blocks": [
+        {
+          "id": "stats",
+          "type": "stats",
+          "options": {
+            "label": "stats · live from github",
+            "tiles": [
+              "year",
+              "allTime",
+              "current",
+              "longest",
+              "stars",
+              "followers"
+            ],
+            "ring": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "rx8xs78w6",
+      "align": "center",
+      "blocks": [
+        {
+          "id": "contrib",
+          "type": "contrib",
+          "options": {
+            "label": "contributions · last 12 months",
+            "shape": "rounded",
+            "weekly": true,
+            "callout": true,
+            "beam": true,
+            "legend": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "rx8xs3b07",
+      "align": "center",
+      "blocks": [
+        {
+          "id": "pulse",
+          "type": "pulse",
+          "options": {
+            "days": "90",
+            "label": "heartbeat · last {days} days",
+            "bpm": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "rx8xs2bw8",
+      "align": "center",
+      "blocks": [
+        {
+          "id": "skyline",
+          "type": "skyline",
+          "options": {
+            "label": "3d skyline · last 12 months",
+            "rotation": "spin",
+            "color": "heat"
+          }
+        }
+      ]
+    },
+    {
+      "id": "rx8xs6yj9",
+      "align": "center",
+      "blocks": [
+        {
+          "id": "divider-2",
+          "type": "divider",
+          "options": {
+            "style": "comet",
+            "ornament": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "rx8xs1wla",
+      "align": "center",
+      "blocks": [
+        {
+          "id": "now",
+          "type": "now",
+          "options": {
+            "repo": "",
+            "label": "now building",
+            "sparkline": true,
+            "progress": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "rx8xs53nb",
+      "align": "center",
+      "blocks": [
+        {
+          "id": "stack",
+          "type": "stack",
+          "options": {
+            "label": "tech stack · orbit",
+            "emblem": "github",
+            "legend": true,
+            "rings": [
+              {
+                "label": "BACKEND",
+                "icons": [
+                  "java",
+                  "spring",
+                  "junit"
+                ]
+              },
+              {
+                "label": "OPS / INFRA",
+                "icons": [
+                  "aws",
+                  "kubernetes",
+                  "githubactions",
+                  "mongodb"
+                ]
+              },
+              {
+                "label": "FRONTEND",
+                "icons": [
+                  "typescript",
+                  "react",
+                  "playwright"
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "rx8xs1kec",
+      "align": "center",
+      "blocks": [
+        {
+          "id": "languages",
+          "type": "languages",
+          "options": {
+            "label": "languages",
+            "max": 5,
+            "style": "donut",
+            "hide": []
+          }
+        },
+        {
+          "id": "rhythm",
+          "type": "rhythm",
+          "options": {
+            "label": "coding rhythm",
+            "weekdays": true,
+            "summary": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "rx8xs2sod",
+      "align": "center",
+      "blocks": [
+        {
+          "id": "journey",
+          "type": "journey",
+          "options": {
+            "label": "journey",
+            "mode": "both",
+            "years": 8
+          }
+        }
+      ]
+    },
+    {
+      "id": "rx8xs25re",
+      "align": "center",
+      "blocks": [
+        {
+          "id": "board",
+          "type": "board",
+          "options": {
+            "title": "departures · latest activity",
+            "rows": 6,
+            "clock": true,
+            "flaps": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "rx8xs4ef",
+      "align": "center",
+      "blocks": [
+        {
+          "id": "project-1",
+          "type": "project",
+          "options": {
+            "source": "pinned",
+            "index": 1,
+            "repo": "",
+            "stats": true,
+            "accent": "runner",
+            "number": true
+          }
+        },
+        {
+          "id": "project-2",
+          "type": "project",
+          "options": {
+            "source": "pinned",
+            "index": 2,
+            "repo": "",
+            "stats": true,
+            "accent": "runner",
+            "number": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "rx8xs1ecg",
+      "align": "center",
+      "blocks": [
+        {
+          "id": "project-3",
+          "type": "project",
+          "options": {
+            "source": "pinned",
+            "index": 3,
+            "repo": "",
+            "stats": true,
+            "accent": "runner",
+            "number": true
+          }
+        },
+        {
+          "id": "project-4",
+          "type": "project",
+          "options": {
+            "source": "pinned",
+            "index": 4,
+            "repo": "",
+            "stats": true,
+            "accent": "runner",
+            "number": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "r-projects-3",
+      "align": "center",
+      "blocks": [
+        {
+          "id": "project-5",
+          "type": "project",
+          "options": {
+            "source": "pinned",
+            "index": 5,
+            "repo": "",
+            "stats": true,
+            "accent": "runner",
+            "number": true
+          }
+        },
+        {
+          "id": "project-6",
+          "type": "project",
+          "options": {
+            "source": "pinned",
+            "index": 6,
+            "repo": "",
+            "stats": true,
+            "accent": "runner",
+            "number": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "rx8xs51eh",
+      "align": "center",
+      "blocks": [
+        {
+          "id": "trophies",
+          "type": "trophies",
+          "options": {
+            "label": "achievements",
+            "trophies": [
+              "streak",
+              "month",
+              "polyglot",
+              "veteran",
+              "shipper",
+              "stars",
+              "chronotype",
+              "consistent"
+            ],
+            "columns": "4"
+          }
+        },
+        {
+          "id": "today",
+          "type": "today",
+          "options": {
+            "label": "today",
+            "weather": true,
+            "moon": true,
+            "quote": true,
+            "quotes": [
+              {
+                "text": "Simplicity is prerequisite for reliability.",
+                "author": "Edsger W. Dijkstra"
+              },
+              {
+                "text": "Make it work, make it right, make it fast.",
+                "author": "Kent Beck"
+              },
+              {
+                "text": "Talk is cheap. Show me the code.",
+                "author": "Linus Torvalds"
+              },
+              {
+                "text": "First, solve the problem. Then, write the code.",
+                "author": "John Johnson"
+              },
+              {
+                "text": "Premature optimization is the root of all evil.",
+                "author": "Donald Knuth"
+              },
+              {
+                "text": "Good programmers write code that humans can understand.",
+                "author": "Martin Fowler"
+              },
+              {
+                "text": "The best error message is the one that never shows up.",
+                "author": "Thomas Fuchs"
+              },
+              {
+                "text": "Deleted code is debugged code.",
+                "author": "Jeff Sickel"
+              },
+              {
+                "text": "Programs must be written for people to read.",
+                "author": "Harold Abelson"
+              },
+              {
+                "text": "Testing leads to failure, and failure leads to understanding.",
+                "author": "Burt Rutan"
+              },
+              {
+                "text": "Simplicity is the soul of efficiency.",
+                "author": "Austin Freeman"
+              },
+              {
+                "text": "Code never lies, comments sometimes do.",
+                "author": "Ron Jeffries"
+              },
+              {
+                "text": "Automate the boring stuff.",
+                "author": "Al Sweigart"
+              },
+              {
+                "text": "You build it, you run it.",
+                "author": "Werner Vogels"
+              }
+            ],
+            "unit": "c"
+          }
+        }
+      ]
+    },
+    {
+      "id": "rx8xs6rwi",
+      "align": "center",
+      "blocks": [
+        {
+          "id": "divider-3",
+          "type": "divider",
+          "options": {
+            "style": "comet",
+            "ornament": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "rx8xs16uj",
+      "align": "center",
+      "blocks": [
+        {
+          "id": "footer",
+          "type": "footer",
+          "options": {
+            "message": "rebuilt every night by readme studio",
+            "stamp": true,
+            "barcode": true,
+            "waves": true
+          }
+        }
+      ]
+    }
+  ],
+  "output": {
+    "branch": "output",
+    "modes": [
+      "dark",
+      "light"
+    ],
+    "repository": "",
+    "schedule": "17 2 * * *"
+  }
+}
