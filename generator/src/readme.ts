@@ -36,12 +36,8 @@ export function layout(data: ProfileData, config: Config): Row[] {
     [{ name: "terminal" }],
     [{ name: "stats" }],
     [{ name: "contrib" }],
-    [{ name: "snake" }],
     [{ name: "pulse" }],
-    [
-      { name: "skyline", width: half },
-      { name: "life", width: half },
-    ],
+    [{ name: "skyline" }],
     [{ name: "divider" }],
     [{ name: "now", href: repo?.url ?? `${profile}?tab=repositories` }],
     [{ name: "stack" }],
@@ -51,11 +47,9 @@ export function layout(data: ProfileData, config: Config): Row[] {
     ],
     [{ name: "journey" }],
     [{ name: "board", href: `${profile}?tab=overview` }],
-    ...Array.from({ length: PROJECT_SLOTS / 2 }, (_, r): Row =>
-      [0, 1].map((c) => {
-        const i = r * 2 + c;
-        return { name: `project-${i + 1}`, width: half, href: data.projects[i]?.url ?? `${profile}?tab=repositories` };
-      }),
+    // one card per pinned repository, two per row
+    ...Array.from({ length: Math.ceil(Math.min(PROJECT_SLOTS, data.projects.length) / 2) }, (_, r): Row =>
+      data.projects.slice(r * 2, r * 2 + 2).map((p, c) => ({ name: `project-${r * 2 + c + 1}`, width: half, href: p.url })),
     ),
     [
       { name: "trophies", width: half },

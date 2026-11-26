@@ -7,7 +7,6 @@ import { localParts } from "../src/lib/astro.js";
 import { renderReadme } from "../src/readme.js";
 import { themeList } from "../src/theme.js";
 import { widgets } from "../src/widgets/index.js";
-import { planRoute } from "../src/widgets/snake.js";
 import type { Ctx } from "../src/widgets/types.js";
 
 const date = new Date("2026-11-27T02:17:00Z");
@@ -34,21 +33,16 @@ describe("svg widgets", () => {
   });
 });
 
-describe("snake", () => {
-  it("eats every active day", () => {
-    const food = new Set(["0,0", "5,6", "52,3", "20,2"]);
-    const { eatenAt } = planRoute(53, 7, food);
-    expect([...eatenAt.keys()].sort()).toEqual([...food].sort());
-  });
-});
-
 describe("readme", () => {
   it("references every widget in both themes and contains no visible text", () => {
     const md = renderReadme(data, config);
-    for (const w of widgets) {
+    const used = widgets.filter((w) => !/^project-(\d)$/.test(w.name) || Number(w.name.slice(8)) <= data.projects.length);
+    expect(used.length).toBeLessThanOrEqual(widgets.length);
+    for (const w of used) {
       expect(md).toContain(`${w.name}-dark.${w.kind}`);
       expect(md).toContain(`${w.name}-light.${w.kind}`);
     }
+    for (const p of data.projects) expect(md).toContain(`href="${p.url}"`);
     const visible = md.replace(/<!--[\s\S]*?-->/g, "").replace(/<[^>]+>/g, "").trim();
     expect(visible).toBe("");
   });
