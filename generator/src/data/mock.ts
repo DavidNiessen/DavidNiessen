@@ -1,7 +1,7 @@
 import { config } from "../config.js";
 import { localParts } from "../lib/astro.js";
-import { fixtureRepos } from "./fixtures/repos.js";
-import type { ContributionDay, ProfileData, Repo } from "./types.js";
+import { fixturePinned, fixtureRepos } from "./fixtures/repos.js";
+import type { ContributionDay, ProfileData } from "./types.js";
 
 /** Small deterministic PRNG (mulberry32). */
 export function rng(seed: number): () => number {
@@ -82,10 +82,7 @@ export function mockData(now = new Date()): ProfileData {
       { name: "Swift", color: "#F05138", bytes: 90_000 },
       { name: "Shell", color: "#89e051", bytes: 40_000 },
     ],
-    projects: [...fixtureRepos]
-      .sort((a, b) => b.stars - a.stars)
-      .slice(0, 4)
-      .map((r): Repo => ({ name: r.name, owner: config.login, description: r.description, url: r.url, stars: r.stars, forks: Math.floor(r.stars / 2), language: r.language })),
+    projects: fixturePinned,
     repos: fixtureRepos,
     yearTotals: { 2021: 412, 2022: 368, 2023: 905, 2024: 1188, 2025: 1374, [year]: weeks.flat().filter((d) => d.date.startsWith(`${year}-`)).reduce((a, d) => a + d.count, 0) },
     events: [

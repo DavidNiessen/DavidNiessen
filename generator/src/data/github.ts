@@ -64,7 +64,7 @@ const MAIN_QUERY = `query($login:String!){
       totalCount
       nodes{ ${REPO_FIELDS} languages(first:10, orderBy:{field:SIZE, direction:DESC}){ edges{ size node{ name color } } } }
     }
-    pinnedItems(first:4, types:REPOSITORY){ nodes{ ... on Repository { ${REPO_FIELDS} } } }
+    pinnedItems(first:6, types:REPOSITORY){ nodes{ ... on Repository { ${REPO_FIELDS} } } }
   }
 }`;
 
@@ -207,7 +207,7 @@ export async function fetchGithub(login = config.login): Promise<Omit<ProfileDat
   const owned = user.repositories.nodes;
   const pinned = user.pinnedItems.nodes.filter((r) => r && r.name);
   const projects = (pinned.length ? pinned : [...owned].filter((r) => !r.isArchived && r.name !== login).sort((a, b) => b.stargazerCount - a.stargazerCount))
-    .slice(0, 4)
+    .slice(0, 6)
     .map(toRepo);
   const [events, commitHours] = await Promise.all([
     soft("events", () => fetchEvents(login), []),

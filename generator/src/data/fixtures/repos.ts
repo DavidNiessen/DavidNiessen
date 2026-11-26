@@ -1,4 +1,4 @@
-import type { RepoSummary } from "../types.js";
+import type { Repo, RepoSummary } from "../types.js";
 
 const L = {
   java: { name: "Java", color: "#b07219" },
@@ -21,13 +21,15 @@ const r = (name: string, description: string, language: RepoSummary["language"],
 
 /** Offline fixture modelled on the public repositories, used for --mock builds and tests. */
 export const fixtureRepos: RepoSummary[] = [
-  r("soundwave", "Turn any song into a rhythm game: stems, auto-charted difficulties and a live 3D crowd.", L.ts, 3, "2026-09-12T10:00:00Z", "2026-11-25T16:26:22Z"),
+  r("soundwave", "Rythm game with ML based song analysis and translation", L.ts, 3, "2026-09-12T10:00:00Z", "2026-11-25T16:26:22Z"),
   r("portfolio", "Animated private cyberpunk portfolio website", L.js, 0, "2026-10-02T10:00:00Z", "2026-11-18T12:43:41Z"),
   r("undusted", "An incremental cleaning game about undusting a universe of miniature planets (Godot 4 + Blender)", L.py, 0, "2026-10-20T10:00:00Z", "2026-11-15T20:55:04Z"),
   r("gatebreaker", "CLI and chrome extension for bypassing download gates", L.ts, 0, "2026-10-28T10:00:00Z", "2026-11-15T10:25:47Z"),
   r("afterlight-studio", "Audio-reactive stage lighting studio with a 3D editor and automatic choreography.", L.ts, 0, "2026-08-30T10:00:00Z", "2026-11-14T20:43:02Z"),
   r("lexicon-mcp", "Local MCP Server for LexiconDJ", L.ts, 3, "2026-07-01T10:00:00Z", "2026-11-06T00:16:14Z"),
   r("syrup", "Independent open-source synthesizer: Serum preset compatibility research and implementation", L.cpp, 0, "2026-10-10T10:00:00Z", "2026-11-04T13:15:17Z"),
+  r("frame", "Advanced media editing and conversion tool for desktop(-first) and web", L.ts, 0, "2026-10-05T10:00:00Z", "2026-10-30T14:56:53Z"),
+  r("skills", "Reusable AI skills for development, DJ workflows, and more. Install with npx skills.", L.js, 0, "2026-10-25T10:00:00Z", "2026-10-31T23:02:58Z"),
   r("doctopus", "An open-source home for your API docs, guides, and playground", L.ts, 0, "2026-09-20T10:00:00Z", "2026-10-30T17:05:48Z"),
   r("flac-classifier", "Classifies FLAC files as genuine hi-res, CD quality, or lossy transcodes.", L.kotlin, 0, "2026-08-20T10:00:00Z", "2026-09-03T16:36:34Z"),
   r("pace-webhook-service", "Scrapes the Axel Springer canteen menu and dispatches it to webhooks.", L.kotlin, 0, "2025-09-01T10:00:00Z", "2025-10-08T09:31:14Z"),
@@ -42,3 +44,9 @@ export const fixtureRepos: RepoSummary[] = [
   r("KotlinJsonConfigAPI", "A simple Json config API for Kotlin", L.kotlin, 1, "2021-07-20T10:00:00Z", "2021-07-25T19:19:48Z"),
   r("Hyperion", "Experience the best Hypixel SkyBlock sword on your own server!", L.java, 3, "2021-05-01T10:00:00Z", "2021-06-19T15:01:04Z"),
 ];
+
+/** Pinned repositories as shown on the profile page. */
+export const fixturePinned: Repo[] = ["soundwave", "doctopus", "frame", "gatebreaker", "lexicon-mcp", "skills"].map((name) => {
+  const r = fixtureRepos.find((x) => x.name === name)!;
+  return { name, owner: "DavidNiessen", description: r.description, url: r.url, stars: r.stars, forks: name === "soundwave" || name === "gatebreaker" ? 1 : 0, language: r.language };
+});

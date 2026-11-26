@@ -1,7 +1,7 @@
 import { config } from "../config.js";
 import { fetchEvents, sumYear } from "./github.js";
 import { fetchWithTimeout, ghGet, soft } from "./http.js";
-import type { ContributionDay, ProfileData } from "./types.js";
+import type { ContributionDay, ProfileData, Repo } from "./types.js";
 import { localParts } from "../lib/astro.js";
 
 /**
@@ -34,6 +34,54 @@ export function parseContributionsHtml(html: string): ContributionDay[][] {
   return weeks;
 }
 
+function decodeEntities(s: string): string {
+  return s
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&amp;/g, "&");
+}
+
+function countOf(s: string | undefined): number {
+  if (!s) return 0;
+  const t = s.trim().toLowerCase().replace(/,/g, "");
+  return t.endsWith("k") ? Math.round(parseFloat(t) * 1000) : Number(t) || 0;
+}
+
+/** Parse the pinned repositories from a GitHub profile page. */
+export function parsePinnedHtml(html: string): Repo[] {
+  const items = html.split(/class="pinned-item-list-item-content"/).slice(1);
+  return items.flatMap((chunk): Repo[] => {
+    const s = chunk.slice(0, chunk.indexOf("</li>") >= 0 ? chunk.indexOf("</li>") : undefined);
+    const href = /href="\/([^/"]+)\/([^/"]+)"/.exec(s);
+    if (!href) return [];
+    const desc = /class="pinned-item-desc[^"]*"[^>]*>([\s\S]*?)<\/p>/.exec(s)?.[1] ?? "";
+    const lang = /itemprop="programmingLanguage">([^<]+)</.exec(s)?.[1];
+    const color = /repo-language-color" style="background-color: ([^;"]+)/.exec(s)?.[1] ?? "";
+    const stars = /\/stargazers"[\s\S]*?<\/svg>\s*([\d.,k]+)/.exec(s)?.[1];
+    const forks = /\/forks"[\s\S]*?<\/svg>\s*([\d.,k]+)/.exec(s)?.[1];
+    return [
+      {
+        owner: href[1],
+        name: href[2],
+        url: `https://github.com/${href[1]}/${href[2]}`,
+        description: decodeEntities(desc.replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim()),
+        stars: countOf(stars),
+        forks: countOf(forks),
+        language: lang ? { name: lang.trim(), color } : null,
+      },
+    ];
+  });
+}
+
+/** Pinned repositories from the public profile page (no API needed). */
+export async function fetchPinned(login = config.login): Promise<Repo[]> {
+  const res = await fetchWithTimeout(`https://github.com/${login}`, { headers: { accept: "text/html" } });
+  if (!res.ok) throw new Error(`profile page → ${res.status}`);
+  return parsePinnedHtml(await res.text());
+}
+
 /** Token-less fallback: scrape the calendar and use the unauthenticated REST API for the rest. */
 export async function fetchScraped(login = config.login): Promise<Omit<ProfileData, "weather" | "generatedAt">> {
   const res = await fetchWithTimeout(`https://github.com/users/${login}/contributions`, { headers: { accept: "text/html" } });
@@ -52,6 +100,7 @@ export async function fetchScraped(login = config.login): Promise<Omit<ProfileDa
     null,
   );
   const own = (repos ?? []).filter((r) => !r.fork);
+  const pinned = (await soft("pinned", () => fetchPinned(login), [])).filter((r) => r.name.toLowerCase() !== login.toLowerCase());
   const total = weeks.flat().reduce((a, d) => a + d.count, 0);
   const langCount = new Map<string, number>();
   own.forEach((r) => r.language && langCount.set(r.language, (langCount.get(r.language) ?? 0) + 1));
@@ -79,10 +128,12 @@ export async function fetchScraped(login = config.login): Promise<Omit<ProfileDa
     languages: [...langCount.entries()]
       .sort((a, b) => b[1] - a[1])
       .map(([name, n]) => ({ name, color: "", bytes: n })),
-    projects: own
+    projects: pinned.length
+      ? pinned
+      : own
       .filter((r) => r.name !== login)
       .sort((a, b) => b.stargazers_count - a.stargazers_count)
-      .slice(0, 4)
+      .slice(0, 6)
       .map((r) => ({
         name: r.name,
         owner: r.owner.login,

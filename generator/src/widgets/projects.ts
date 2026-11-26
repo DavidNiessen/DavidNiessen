@@ -5,9 +5,10 @@ import type { Ctx, SvgWidget } from "./types.js";
 
 const W = 410;
 const H = 168;
-export const PROJECT_SLOTS = 4;
+/** GitHub allows up to six pinned items. */
+export const PROJECT_SLOTS = 6;
 
-/** Repository card for pinned (or top) project number `index`. */
+/** Card for pinned repository number `index` (empty slots render a placeholder and are left out of the README). */
 function projectCard(index: number): SvgWidget {
   return {
     kind: "svg",
