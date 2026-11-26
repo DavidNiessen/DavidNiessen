@@ -24,6 +24,12 @@
     },
     "links": [
       {
+        "icon": "website",
+        "label": "Portfolio",
+        "url": "https://niessen.dev",
+        "handle": "niessen.dev"
+      },
+      {
         "icon": "linkedin",
         "label": "LinkedIn",
         "url": "https://niessen.dev/in",
@@ -34,12 +40,6 @@
         "label": "Instagram",
         "url": "https://niessen.dev/ig",
         "handle": "niessen.dev/ig"
-      },
-      {
-        "icon": "website",
-        "label": "Website",
-        "url": "https://niessen.dev",
-        "handle": "niessen.dev"
       },
       {
         "icon": "github",
@@ -84,7 +84,7 @@
             "title": "",
             "typewriter": true,
             "greeting": true,
-            "emblem": "github",
+            "emblem": "kotlin",
             "emblemStyle": "orbit",
             "glitch": true,
             "scanline": true,
@@ -131,7 +131,7 @@
           "type": "terminal",
           "options": {
             "title": "",
-            "prompt": "arrow",
+            "prompt": "gt",
             "cwd": "~",
             "commands": [
               {
@@ -575,17 +575,18 @@
           "id": "footer",
           "type": "footer",
           "options": {
-            "message": "rebuilt every night by readme studio",
+            "message": "",
             "stamp": true,
             "barcode": true,
-            "waves": true
+            "waves": true,
+            "credit": true
           }
         }
       ]
     }
   ],
   "output": {
-    "branch": "readme-studio",
+    "branch": "output",
     "modes": [
       "dark",
       "light"
