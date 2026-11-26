@@ -55,7 +55,7 @@ export function parsePinnedHtml(html: string): Repo[] {
   return items.flatMap((chunk): Repo[] => {
     const s = chunk.slice(0, chunk.indexOf("</li>") >= 0 ? chunk.indexOf("</li>") : undefined);
     const href = /href="\/([^/"]+)\/([^/"]+)"/.exec(s);
-    if (!href) return [];
+    if (!href || />\s*Private\s*</.test(s)) return [];
     const desc = /class="pinned-item-desc[^"]*"[^>]*>([\s\S]*?)<\/p>/.exec(s)?.[1] ?? "";
     const lang = /itemprop="programmingLanguage">([^<]+)</.exec(s)?.[1];
     const color = /repo-language-color" style="background-color: ([^;"]+)/.exec(s)?.[1] ?? "";
@@ -96,10 +96,11 @@ export async function fetchScraped(login = config.login): Promise<Omit<ProfileDa
   const repos = await soft(
     "rest repos",
     () =>
-      ghGet<{ name: string; owner: { login: string }; description: string | null; html_url: string; stargazers_count: number; forks_count: number; fork: boolean; language: string | null; created_at: string; pushed_at: string }[]>(`https://api.github.com/users/${login}/repos?per_page=100&sort=pushed`),
+      ghGet<{ name: string; owner: { login: string }; description: string | null; html_url: string; stargazers_count: number; forks_count: number; fork: boolean; private?: boolean; language: string | null; created_at: string; pushed_at: string }[]>(`https://api.github.com/users/${login}/repos?type=owner&per_page=100&sort=pushed`),
     null,
   );
-  const own = (repos ?? []).filter((r) => !r.fork);
+  // privacy guard: public, non-fork repositories only
+  const own = (repos ?? []).filter((r) => !r.fork && r.private !== true);
   const pinned = (await soft("pinned", () => fetchPinned(login), [])).filter((r) => r.name.toLowerCase() !== login.toLowerCase());
   const total = weeks.flat().reduce((a, d) => a + d.count, 0);
   const langCount = new Map<string, number>();

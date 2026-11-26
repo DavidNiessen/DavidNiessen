@@ -18,6 +18,7 @@ interface GqlRepo {
   stargazerCount: number;
   forkCount: number;
   isArchived?: boolean;
+  isPrivate?: boolean;
   pushedAt?: string;
   createdAt?: string;
   owner: { login: string };
@@ -49,7 +50,7 @@ interface MainQuery {
   };
 }
 
-const REPO_FIELDS = `name description url stargazerCount forkCount isArchived pushedAt createdAt owner{login} primaryLanguage{name color}`;
+const REPO_FIELDS = `name description url stargazerCount forkCount isArchived isPrivate pushedAt createdAt owner{login} primaryLanguage{name color}`;
 
 const MAIN_QUERY = `query($login:String!){
   user(login:$login){
@@ -60,7 +61,7 @@ const MAIN_QUERY = `query($login:String!){
       contributionYears totalCommitContributions totalPullRequestReviewContributions restrictedContributionsCount
       contributionCalendar{ totalContributions weeks{ contributionDays{ date contributionCount contributionLevel weekday } } }
     }
-    repositories(first:100, ownerAffiliations:OWNER, isFork:false, orderBy:{field:PUSHED_AT, direction:DESC}){
+    repositories(first:100, ownerAffiliations:OWNER, isFork:false, privacy:PUBLIC, orderBy:{field:PUSHED_AT, direction:DESC}){
       totalCount
       nodes{ ${REPO_FIELDS} languages(first:10, orderBy:{field:SIZE, direction:DESC}){ edges{ size node{ name color } } } }
     }
@@ -106,6 +107,7 @@ async function yearTotals(login: string, years: number[]): Promise<Record<number
 
 interface RestEvent {
   type: string;
+  public?: boolean;
   repo: { name: string };
   created_at: string;
   payload: {
@@ -152,9 +154,23 @@ export function mapEvent(e: RestEvent): ActivityEvent | null {
   }
 }
 
+/**
+ * Privacy guard: only public repositories may ever be named in the README.
+ * A personal access token can see private repositories and pins, so every
+ * repository list is filtered here, in addition to `privacy:PUBLIC` in the query.
+ */
+export function publicRepos<T extends { isPrivate?: boolean } | null | undefined>(nodes: T[]): NonNullable<T>[] {
+  return nodes.filter((r): r is NonNullable<T> => !!r && r.isPrivate !== true);
+}
+
+/** Privacy guard for activity: drop anything not explicitly public. */
+export function publicEvents<T extends { public?: boolean }>(events: T[]): T[] {
+  return events.filter((e) => e.public === true);
+}
+
 export async function fetchEvents(login: string): Promise<ActivityEvent[]> {
   const raw = await ghGet<RestEvent[]>(`https://api.github.com/users/${login}/events/public?per_page=50`);
-  return raw.map(mapEvent).filter((e): e is ActivityEvent => e !== null).slice(0, 8);
+  return publicEvents(raw).map(mapEvent).filter((e): e is ActivityEvent => e !== null).slice(0, 8);
 }
 
 /** Commit counts per local hour, sampled from the most recently pushed repositories. */
@@ -204,8 +220,8 @@ export async function fetchGithub(login = config.login): Promise<Omit<ProfileDat
   const thisYear = localParts(new Date()).year;
   const lastYearTotal = cc.contributionCalendar.totalContributions;
   const allTime = Object.values(years).reduce((a, b) => a + b, 0);
-  const owned = user.repositories.nodes;
-  const pinned = user.pinnedItems.nodes.filter((r) => r && r.name);
+  const owned = publicRepos(user.repositories.nodes);
+  const pinned = publicRepos(user.pinnedItems.nodes).filter((r) => r.name && r.name.toLowerCase() !== login.toLowerCase());
   const projects = (pinned.length ? pinned : [...owned].filter((r) => !r.isArchived && r.name !== login).sort((a, b) => b.stargazerCount - a.stargazerCount))
     .slice(0, 6)
     .map(toRepo);

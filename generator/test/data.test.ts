@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
 import { derive, streaks } from "../src/data/derive.js";
-import { mapEvent } from "../src/data/github.js";
+import { mapEvent, publicEvents, publicRepos } from "../src/data/github.js";
 import { mockData } from "../src/data/mock.js";
-import { parseContributionsHtml } from "../src/data/scrape.js";
+import { parseContributionsHtml, parsePinnedHtml } from "../src/data/scrape.js";
 import type { ContributionDay } from "../src/data/types.js";
 
 const days = (counts: number[]): ContributionDay[] =>
@@ -55,5 +55,24 @@ describe("mock data", () => {
     const d = derive(a);
     expect(d.days.length).toBeGreaterThan(360);
     expect(d.weekdays).toHaveLength(7);
+  });
+});
+
+describe("privacy", () => {
+  it("never passes private repositories or pins through", () => {
+    const nodes = [{ name: "open", isPrivate: false }, { name: "secret", isPrivate: true }, null, { name: "legacy" }];
+    expect(publicRepos(nodes).map((r) => r.name)).toEqual(["open", "legacy"]);
+  });
+
+  it("drops events that are not explicitly public", () => {
+    const evs = [{ id: 1, public: true }, { id: 2, public: false }, { id: 3 }];
+    expect(publicEvents(evs).map((e) => e.id)).toEqual([1]);
+  });
+
+  it("skips pinned items labelled private on the profile page", () => {
+    const item = (name: string, label: string) =>
+      `<li class="pinned-item-list-item"><div class="pinned-item-list-item-content"><a href="/DavidNiessen/${name}"><span class="repo">${name}</span></a><span class="Label">${label}</span><p class="pinned-item-desc">d</p></div></li>`;
+    const pins = parsePinnedHtml(item("soundwave", "Public") + item("hidden-thing", "Private"));
+    expect(pins.map((p) => p.name)).toEqual(["soundwave"]);
   });
 });
