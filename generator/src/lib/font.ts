@@ -9,38 +9,27 @@ const fontDir = fileURLToPath(new URL("../../assets/fonts/", import.meta.url));
 
 export const FONT_FAMILY = "JBMono";
 export const FONT_STACK = `${FONT_FAMILY}, 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace`;
-/** Big Shoulders Display (SIL OFL 1.1): condensed industrial face for panel lettering. */
-export const DISPLAY_FAMILY = "BSDisplay";
-export const DISPLAY_STACK = `${DISPLAY_FAMILY}, 'Big Shoulders Display', 'Arial Narrow', sans-serif`;
 
-/** Embeddable faces: mono regular/bold and the display face. */
-export type Weight = 400 | 700 | "display";
-
-const files: Record<string, string> = {
-  "400": "jetbrains-mono-latin-400-normal",
-  "700": "jetbrains-mono-latin-700-normal",
-  display: "big-shoulders-display-latin-800-normal",
-};
+export type Weight = 400 | 700;
 
 const cache = new Map<Weight, string>();
 
 function woff2Base64(weight: Weight): string {
   let b64 = cache.get(weight);
   if (!b64) {
-    b64 = readFileSync(join(fontDir, `${files[String(weight)]}.woff2`)).toString("base64");
+    b64 = readFileSync(join(fontDir, `jetbrains-mono-latin-${weight}-normal.woff2`)).toString("base64");
     cache.set(weight, b64);
   }
   return b64;
 }
 
-/** @font-face rules embedding the fonts as data URIs (SVG <img> cannot load external fonts). */
-export function fontFaceCss(weights: Weight[] = [400, 700, "display"]): string {
+/** @font-face rules embedding JetBrains Mono as data URIs (SVG <img> cannot load external fonts). */
+export function fontFaceCss(weights: Weight[] = [400, 700]): string {
   return weights
-    .map((w) => {
-      const family = w === "display" ? DISPLAY_FAMILY : FONT_FAMILY;
-      const weight = w === "display" ? 800 : w;
-      return `@font-face{font-family:${family};font-weight:${weight};font-style:normal;src:url(data:font/woff2;base64,${woff2Base64(w)}) format('woff2');}`;
-    })
+    .map(
+      (w) =>
+        `@font-face{font-family:${FONT_FAMILY};font-weight:${w};font-style:normal;src:url(data:font/woff2;base64,${woff2Base64(w)}) format('woff2');}`,
+    )
     .join("");
 }
 
@@ -92,9 +81,11 @@ export function woffToSfnt(woff: Buffer): Buffer {
 export function ttfFontFiles(): string[] {
   const dir = join(tmpdir(), "profile-generator-fonts");
   mkdirSync(dir, { recursive: true });
-  return Object.values(files).map((name) => {
-    const out = join(dir, `${name}.ttf`);
-    if (!existsSync(out)) writeFileSync(out, woffToSfnt(readFileSync(join(fontDir, `${name}.woff`))));
+  return ([400, 700] as Weight[]).map((w) => {
+    const out = join(dir, `jetbrains-mono-${w}.ttf`);
+    if (!existsSync(out)) {
+      writeFileSync(out, woffToSfnt(readFileSync(join(fontDir, `jetbrains-mono-latin-${w}-normal.woff`))));
+    }
     return out;
   });
 }
