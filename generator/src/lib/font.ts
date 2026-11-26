@@ -1,11 +1,11 @@
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
-import { createRequire } from "node:module";
-import { dirname, join } from "node:path";
+import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 import { tmpdir } from "node:os";
 import { inflateSync } from "node:zlib";
 
-const require = createRequire(import.meta.url);
-const fontDir = join(dirname(require.resolve("@fontsource/jetbrains-mono/package.json")), "files");
+/** JetBrains Mono (SIL OFL 1.1), latin subset, vendored in assets/fonts. */
+const fontDir = fileURLToPath(new URL("../../assets/fonts/", import.meta.url));
 
 export const FONT_FAMILY = "JBMono";
 export const FONT_STACK = `${FONT_FAMILY}, 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace`;
@@ -35,7 +35,7 @@ export function fontFaceCss(weights: Weight[] = [400, 700]): string {
 
 /**
  * Convert a WOFF 1.0 file into a plain SFNT (TTF/OTF) buffer.
- * resvg only understands SFNT fonts, fontsource ships WOFF/WOFF2.
+ * resvg only understands SFNT fonts; the repo vendors WOFF/WOFF2.
  */
 export function woffToSfnt(woff: Buffer): Buffer {
   if (woff.toString("ascii", 0, 4) !== "wOFF") throw new Error("not a WOFF file");
