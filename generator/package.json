@@ -1,0 +1,27 @@
+{
+  "name": "profile-generator",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Generates the animated SVG/GIF assets and README for the GitHub profile",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "tsx src/index.ts",
+    "build:mock": "tsx src/index.ts --mock",
+    "preview": "tsx src/preview.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@resvg/resvg-js": "2.6.2"
+  },
+  "devDependencies": {
+    "@types/node": "22.19.1",
+    "fast-xml-parser": "5.3.0",
+    "tsx": "4.21.0",
+    "typescript": "5.9.3",
+    "vitest": "4.0.15"
+  }
+}
