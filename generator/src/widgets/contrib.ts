@@ -4,11 +4,11 @@ import { label, svg } from "../lib/svg.js";
 import type { Ctx, SvgWidget } from "./types.js";
 
 const W = 840;
-const H = 280;
+const H = 262;
 const CELL = 11;
 const STEP = 14;
 const GX = 58;
-const GY = 90;
+const GY = 70;
 
 function niceDate(iso: string): string {
   const [, m, d] = iso.split("-").map(Number);
@@ -82,9 +82,9 @@ export const contrib: SvgWidget = {
       callout = `<g class="in" style="animation-delay:2.4s">
 <circle cx="${bx}" cy="${bY}" r="9" stroke="${t.glow}" stroke-width="1.5" class="fx loop" style="animation:ping 1.8s ease-out 2.4s infinite"/>
 <rect x="${bx - 7.5}" y="${bY - 7.5}" width="15" height="15" rx="4" stroke="${t.text}" stroke-width="1.5"/>
-<path d="M${bx} ${bY - 9}V${GY - 26}" stroke="${t.glow}" stroke-dasharray="2 2"/>
-<rect x="${left}" y="${GY - 46}" width="${tw}" height="20" rx="10" fill="${t.accent}"/>
-<text x="${left + tw / 2}" y="${GY - 32.5}" font-size="11" text-anchor="middle" fill="#fff" class="b">${esc(text)}</text>
+<path d="M${bx} ${bY - 9}V${GY - 22}" stroke="${t.glow}" stroke-dasharray="2 2"/>
+<rect x="${left}" y="${GY - 42}" width="${tw}" height="20" rx="10" fill="${t.accent}"/>
+<text x="${left + tw / 2}" y="${GY - 28.5}" font-size="11" text-anchor="middle" fill="#fff" class="b">${esc(text)}</text>
 </g>`;
     }
 
@@ -97,7 +97,7 @@ export const contrib: SvgWidget = {
     const total = groupDigits(ctx.data.lastYearTotal);
     const body = `<rect x=".5" y=".5" width="${W - 1}" height="${H - 1}" rx="12" fill="${t.card}" stroke="${t.border}"/>
 ${label(t, 24, 30, "contributions · last 12 months")}
-<text x="${W - 24}" y="30" font-size="12" text-anchor="end" class="m fade" xml:space="preserve"><tspan class="t b">${total}</tspan> in the last year  ·  <tspan class="t b">${ctx.d.active}</tspan> active days</text>
+<text x="${W - 24}" y="30" font-size="12" text-anchor="end" class="m fade"><tspan class="t b" font-size="14">${total}</tspan> in the last year · <tspan class="t b" font-size="14">${ctx.d.active}</tspan> active days</text>
 ${months.join("")}
 ${dayLabels}
 ${cells.join("")}

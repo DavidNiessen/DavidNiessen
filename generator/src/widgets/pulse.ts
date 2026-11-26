@@ -5,7 +5,7 @@ import type { Ctx, SvgWidget } from "./types.js";
 
 const W = 840;
 const H = 190;
-const DAYS = 49;
+const DAYS = 90;
 
 /** Build an ECG trace: one heartbeat per day, QRS amplitude ∝ contributions. */
 export function ecgPoints(counts: number[], x0: number, x1: number, base: number, amp: number): [number, number][] {
@@ -19,7 +19,7 @@ export function ecgPoints(counts: number[], x0: number, x1: number, base: number
       pts.push([x + step, base]);
       return;
     }
-    const h = 6 + Math.sqrt(k) * amp;
+    const h = 6 + k * amp;
     pts.push(
       [x + step * 0.18, base],
       [x + step * 0.26, base - h * 0.12], // P wave
@@ -45,7 +45,7 @@ export function polyLength(pts: [number, number][]): number {
 export const pulse: SvgWidget = {
   kind: "svg",
   name: "pulse",
-  alt: "contribution heartbeat",
+  alt: "90-day contribution heartbeat",
   render(ctx: Ctx) {
     const t = ctx.theme;
     const days = lastDays(ctx.d.days, DAYS);
@@ -90,8 +90,8 @@ ${label(t, 24, 30, `heartbeat · last ${DAYS} days`)}
 <g class="heart loop"><path transform="translate(${x1 + 44} 62) scale(1.1)" d="M8 14s-6-3.6-6-8a3.2 3.2 0 0 1 6-1.6A3.2 3.2 0 0 1 14 6c0 4.4-6 8-6 8Z" fill="${t.accent}" filter="url(#glow)"/></g>
 <text x="${x1 + 70}" y="76" font-size="10.5" letter-spacing="1" class="m">BPM*</text>
 <text x="${x1 + 44}" y="122" font-size="40" class="t b">${bpm}</text>
-<text x="${x1 + 44}" y="146" font-size="10" class="m">*avg contributions</text>
-<text x="${x1 + 44}" y="159" font-size="10" class="m"> per week, 7 weeks</text>
+<text x="${x1 + 44}" y="144" font-size="10" class="m">*commits per week,</text>
+<text x="${x1 + 44}" y="157" font-size="10" class="m">roughly</text>
 </g>`;
     return svg({ width: W, height: H, theme: t, title: this.alt, css, defs, body });
   },
