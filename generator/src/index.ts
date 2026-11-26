@@ -5,6 +5,7 @@ import { derive } from "./data/derive.js";
 import { loadData } from "./data/index.js";
 import { localParts } from "./lib/astro.js";
 import { themeList } from "./theme.js";
+import { renderReadme } from "./readme.js";
 import { widgets } from "./widgets/index.js";
 import type { Ctx } from "./widgets/types.js";
 
@@ -41,6 +42,11 @@ async function main(): Promise<void> {
       console.log(`  ${assetName(w.name, theme.name, ext).padEnd(32)} ${(size / 1024).toFixed(1).padStart(8)} KB ${ms.toFixed(0).padStart(6)} ms`);
       if (size > LIMITS[ext]) errors.push(`${file} is ${(size / 1024 / 1024).toFixed(2)} MB (limit ${LIMITS[ext] / 1024 / 1024} MB)`);
     }
+  }
+  if (!only) {
+    writeFileSync(join(DIST, "README.md"), renderReadme(data, config));
+    const { writePreview } = await import("./preview.js");
+    writePreview(data);
   }
   if (errors.length) {
     console.error(errors.join("\n"));
