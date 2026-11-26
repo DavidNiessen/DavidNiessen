@@ -41,3 +41,11 @@ export type GlyphName = keyof typeof glyphs;
 export function glyph(name: GlyphName, x: number, y: number, size: number, color: string, extra = ""): string {
   return `<svg x="${x}" y="${y}" width="${size}" height="${size}" viewBox="0 0 16 16" fill="none" stroke="${color}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" ${extra}>${glyphs[name]}</svg>`;
 }
+
+/** Deterministic pseudo-random in [0,1) from a string + index. */
+export function hash01(seed: string, i = 0): number {
+  let h = 2166136261 ^ i;
+  for (const c of seed) h = Math.imul(h ^ c.charCodeAt(0), 16777619);
+  h = Math.imul(h ^ (h >>> 13), 0x5bd1e995);
+  return ((h ^ (h >>> 15)) >>> 0) / 4294967296;
+}
