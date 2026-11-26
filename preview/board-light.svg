@@ -37,7 +37,7 @@ text{font-family:JBMono, 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, 
 <g class="in" style="animation-delay:0s">
 <circle cx="28" cy="26" r="4" fill="#dc2626"/><circle cx="28" cy="26" r="4" fill="#dc2626" class="loop" style="animation:pulse 2s ease-in-out infinite" filter="url(#glow)"/>
 <text x="40" y="30" font-size="12" letter-spacing="2" class="m b">DEPARTURES · LATEST ACTIVITY</text></g>
-<text x="816" y="31" font-size="14" text-anchor="end" class="t b">10:07</text>
+<text x="816" y="31" font-size="14" text-anchor="end" class="t b">10:14</text>
 <text x="756" y="31" font-size="10.5" text-anchor="end" letter-spacing="1" class="m">GITHUB.COM/DAVIDNIESSEN</text>
 <text x="30" y="76" font-size="10" letter-spacing="1.5" class="m">TIME</text><text x="109.5" y="76" font-size="10" letter-spacing="1.5" class="m">EVENT</text><text x="215.2" y="76" font-size="10" letter-spacing="1.5" class="m">REPOSITORY</text><text x="438.79999999999995" y="76" font-size="10" letter-spacing="1.5" class="m">DETAIL</text><text x="688.5999999999999" y="76" font-size="10" letter-spacing="1.5" class="m">STATUS</text>
 <g><rect x="30.0" y="86" width="11.5" height="22" rx="2" fill="#f4f4f5"/>
@@ -63,7 +63,7 @@ text{font-family:JBMono, 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, 
 <rect x="69.3" y="96.5" width="11.5" height="1" fill="#fafafa" opacity=".9"/></g><g><rect x="82.4" y="86" width="11.5" height="22" rx="2" fill="#f4f4f5"/>
 <g style="transform-box:fill-box;transform-origin:center;animation:flip .32s ease-out 0.55s both">
 <text x="88.2" y="101.5" font-size="13" text-anchor="middle" class="b m" style="animation:off .01s 0.55s both">Y</text>
-<text x="88.2" y="101.5" font-size="13" text-anchor="middle" class="b" fill="#71717a" style="animation:on .01s 0.55s both"><tspan>2</tspan></text>
+<text x="88.2" y="101.5" font-size="13" text-anchor="middle" class="b" fill="#71717a" style="animation:on .01s 0.55s both"><tspan>9</tspan></text>
 </g>
 <rect x="82.4" y="96.5" width="11.5" height="1" fill="#fafafa" opacity=".9"/></g><g><rect x="109.5" y="86" width="11.5" height="22" rx="2" fill="#f4f4f5"/>
 <g style="transform-box:fill-box;transform-origin:center;animation:flip .32s ease-out 0.56s both">
@@ -328,12 +328,12 @@ text{font-family:JBMono, 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, 
 <rect x="56.2" y="128.5" width="11.5" height="1" fill="#fafafa" opacity=".9"/></g><g><rect x="69.3" y="118" width="11.5" height="22" rx="2" fill="#f4f4f5"/>
 <g style="transform-box:fill-box;transform-origin:center;animation:flip .32s ease-out 0.77s both">
 <text x="75.0" y="133.5" font-size="13" text-anchor="middle" class="b m" style="animation:off .01s 0.77s both">F</text>
-<text x="75.0" y="133.5" font-size="13" text-anchor="middle" class="b" fill="#71717a" style="animation:on .01s 0.77s both"><tspan>4</tspan></text>
+<text x="75.0" y="133.5" font-size="13" text-anchor="middle" class="b" fill="#71717a" style="animation:on .01s 0.77s both"><tspan>5</tspan></text>
 </g>
 <rect x="69.3" y="128.5" width="11.5" height="1" fill="#fafafa" opacity=".9"/></g><g><rect x="82.4" y="118" width="11.5" height="22" rx="2" fill="#f4f4f5"/>
 <g style="transform-box:fill-box;transform-origin:center;animation:flip .32s ease-out 0.75s both">
 <text x="88.2" y="133.5" font-size="13" text-anchor="middle" class="b m" style="animation:off .01s 0.75s both">S</text>
-<text x="88.2" y="133.5" font-size="13" text-anchor="middle" class="b" fill="#71717a" style="animation:on .01s 0.75s both"><tspan>7</tspan></text>
+<text x="88.2" y="133.5" font-size="13" text-anchor="middle" class="b" fill="#71717a" style="animation:on .01s 0.75s both"><tspan>4</tspan></text>
 </g>
 <rect x="82.4" y="128.5" width="11.5" height="1" fill="#fafafa" opacity=".9"/></g><g><rect x="109.5" y="118" width="11.5" height="22" rx="2" fill="#f4f4f5"/>
 <g style="transform-box:fill-box;transform-origin:center;animation:flip .32s ease-out 0.84s both">
@@ -598,12 +598,12 @@ text{font-family:JBMono, 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, 
 <rect x="56.2" y="160.5" width="11.5" height="1" fill="#fafafa" opacity=".9"/></g><g><rect x="69.3" y="150" width="11.5" height="22" rx="2" fill="#f4f4f5"/>
 <g style="transform-box:fill-box;transform-origin:center;animation:flip .32s ease-out 0.89s both">
 <text x="75.0" y="165.5" font-size="13" text-anchor="middle" class="b m" style="animation:off .01s 0.89s both">E</text>
-<text x="75.0" y="165.5" font-size="13" text-anchor="middle" class="b" fill="#71717a" style="animation:on .01s 0.89s both"><tspan>1</tspan></text>
+<text x="75.0" y="165.5" font-size="13" text-anchor="middle" class="b" fill="#71717a" style="animation:on .01s 0.89s both"><tspan>2</tspan></text>
 </g>
 <rect x="69.3" y="160.5" width="11.5" height="1" fill="#fafafa" opacity=".9"/></g><g><rect x="82.4" y="150" width="11.5" height="22" rx="2" fill="#f4f4f5"/>
 <g style="transform-box:fill-box;transform-origin:center;animation:flip .32s ease-out 0.81s both">
 <text x="88.2" y="165.5" font-size="13" text-anchor="middle" class="b m" style="animation:off .01s 0.81s both">S</text>
-<text x="88.2" y="165.5" font-size="13" text-anchor="middle" class="b" fill="#71717a" style="animation:on .01s 0.81s both"><tspan>7</tspan></text>
+<text x="88.2" y="165.5" font-size="13" text-anchor="middle" class="b" fill="#71717a" style="animation:on .01s 0.81s both"><tspan>4</tspan></text>
 </g>
 <rect x="82.4" y="160.5" width="11.5" height="1" fill="#fafafa" opacity=".9"/></g><g><rect x="109.5" y="150" width="11.5" height="22" rx="2" fill="#f4f4f5"/>
 <g style="transform-box:fill-box;transform-origin:center;animation:flip .32s ease-out 0.87s both">
