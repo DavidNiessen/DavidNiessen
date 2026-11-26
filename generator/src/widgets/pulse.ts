@@ -89,7 +89,7 @@ ${label(t, 24, 30, `heartbeat · last ${DAYS} days`)}
 <rect x="${x1 + 24}" y="44" width="${W - x1 - 48}" height="${H - 64}" rx="10" fill="${t.raised}" stroke="${t.border}"/>
 <g class="heart loop"><path transform="translate(${x1 + 44} 62) scale(1.1)" d="M8 14s-6-3.6-6-8a3.2 3.2 0 0 1 6-1.6A3.2 3.2 0 0 1 14 6c0 4.4-6 8-6 8Z" fill="${t.accent}" filter="url(#glow)"/></g>
 <text x="${x1 + 70}" y="76" font-size="10.5" letter-spacing="1" class="m">BPM*</text>
-<text x="${x1 + 44}" y="122" font-size="40" class="t b">${bpm}</text>
+<text x="${x1 + 44}" y="122" font-size="${Math.min(40, Math.floor(124 / (bpm.length * 0.6)))}" class="t b">${bpm}</text>
 <text x="${x1 + 44}" y="144" font-size="10" class="m">*commits per week,</text>
 <text x="${x1 + 44}" y="157" font-size="10" class="m">roughly</text>
 </g>`;

@@ -1,6 +1,6 @@
 import { config } from "../config.js";
 import { fetchEvents, sumYear } from "./github.js";
-import { fetchWithTimeout, getJson, githubHeaders, soft } from "./http.js";
+import { fetchWithTimeout, ghGet, soft } from "./http.js";
 import type { ContributionDay, ProfileData } from "./types.js";
 import { localParts } from "../lib/astro.js";
 
@@ -42,22 +42,16 @@ export async function fetchScraped(login = config.login): Promise<Omit<ProfileDa
   if (!weeks.length) throw new Error("contributions page had no calendar cells");
   const user = await soft(
     "rest user",
-    () => getJson<{ name: string | null; created_at: string; followers: number; following: number; public_repos: number }>(
-      `https://api.github.com/users/${login}`,
-      githubHeaders(),
-    ),
+    () => ghGet<{ name: string | null; created_at: string; followers: number; following: number; public_repos: number }>(`https://api.github.com/users/${login}`),
     null,
   );
   const repos = await soft(
     "rest repos",
     () =>
-      getJson<{ name: string; owner: { login: string }; description: string | null; html_url: string; stargazers_count: number; forks_count: number; fork: boolean; language: string | null; created_at: string; pushed_at: string }[]>(
-        `https://api.github.com/users/${login}/repos?per_page=100&sort=pushed`,
-        githubHeaders(),
-      ),
-    [],
+      ghGet<{ name: string; owner: { login: string }; description: string | null; html_url: string; stargazers_count: number; forks_count: number; fork: boolean; language: string | null; created_at: string; pushed_at: string }[]>(`https://api.github.com/users/${login}/repos?per_page=100&sort=pushed`),
+    null,
   );
-  const own = repos.filter((r) => !r.fork);
+  const own = (repos ?? []).filter((r) => !r.fork);
   const total = weeks.flat().reduce((a, d) => a + d.count, 0);
   const langCount = new Map<string, number>();
   own.forEach((r) => r.language && langCount.set(r.language, (langCount.get(r.language) ?? 0) + 1));
@@ -78,8 +72,8 @@ export async function fetchScraped(login = config.login): Promise<Omit<ProfileDa
       pullRequests: null,
       issues: null,
       reviews: null,
-      stars: own.reduce((a, r) => a + r.stargazers_count, 0),
-      forks: own.reduce((a, r) => a + r.forks_count, 0),
+      stars: repos ? own.reduce((a, r) => a + r.stargazers_count, 0) : null,
+      forks: repos ? own.reduce((a, r) => a + r.forks_count, 0) : null,
       privateContributions: null,
     },
     languages: [...langCount.entries()]

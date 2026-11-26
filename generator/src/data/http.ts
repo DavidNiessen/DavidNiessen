@@ -29,6 +29,17 @@ export function githubHeaders(): Record<string, string> {
   };
 }
 
+/** GitHub REST GET: authenticated when a token exists, retried anonymously if the token is rejected. */
+export async function ghGet<T>(url: string): Promise<T> {
+  try {
+    return await getJson<T>(url, githubHeaders());
+  } catch (e) {
+    if (!token() || !/→ 40[13]$/.test((e as Error).message)) throw e;
+    const { authorization: _drop, ...anon } = githubHeaders();
+    return await getJson<T>(url, anon);
+  }
+}
+
 export async function graphql<T>(query: string, variables: Record<string, unknown>): Promise<T> {
   const t = token();
   if (!t) throw new Error("no GitHub token for GraphQL");

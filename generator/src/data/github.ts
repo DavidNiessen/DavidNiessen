@@ -1,6 +1,6 @@
 import { config } from "../config.js";
 import { localParts } from "../lib/astro.js";
-import { getJson, githubHeaders, graphql, soft } from "./http.js";
+import { ghGet, graphql, soft } from "./http.js";
 import type { ActivityEvent, ContributionDay, LanguageShare, ProfileData, Repo, RepoSummary } from "./types.js";
 
 const LEVELS: Record<string, ContributionDay["level"]> = {
@@ -153,7 +153,7 @@ export function mapEvent(e: RestEvent): ActivityEvent | null {
 }
 
 export async function fetchEvents(login: string): Promise<ActivityEvent[]> {
-  const raw = await getJson<RestEvent[]>(`https://api.github.com/users/${login}/events/public?per_page=50`, githubHeaders());
+  const raw = await ghGet<RestEvent[]>(`https://api.github.com/users/${login}/events/public?per_page=50`);
   return raw.map(mapEvent).filter((e): e is ActivityEvent => e !== null).slice(0, 8);
 }
 
@@ -166,10 +166,7 @@ export async function fetchCommitHours(login: string, repos: { owner: string; na
     const commits = await soft(
       `commits ${r.name}`,
       () =>
-        getJson<{ commit: { author: { date: string } } }[]>(
-          `https://api.github.com/repos/${r.owner}/${r.name}/commits?author=${login}&since=${since}&per_page=100`,
-          githubHeaders(),
-        ),
+        ghGet<{ commit: { author: { date: string } } }[]>(`https://api.github.com/repos/${r.owner}/${r.name}/commits?author=${login}&since=${since}&per_page=100`),
       [],
     );
     for (const c of commits) {
