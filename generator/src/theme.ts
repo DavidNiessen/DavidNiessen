@@ -1,49 +1,44 @@
 export type ThemeName = "dark" | "light";
 
+/**
+ * Design language: Swiss editorial. Flat paper and ink, one red spot
+ * colour, sharp corners, hairline rules, a strict grid and very large
+ * condensed type. No gradients, glows, shadows or rounded glass.
+ */
 export interface Theme {
   name: ThemeName;
-  /** page / outer background */
-  bg: string;
-  /** card surface */
-  card: string;
-  /** raised element on a card */
-  raised: string;
-  border: string;
-  text: string;
+  paper: string;
+  ink: string;
   muted: string;
-  subtle: string;
-  accent: string;
-  glow: string;
-  /** contribution heat scale, level 0..4 */
+  /** hairlines and empty cells */
+  faint: string;
+  red: string;
+  /** text on red */
+  onRed: string;
+  /** contribution levels 0..4: greys up to ink, red on top */
   heat: [string, string, string, string, string];
 }
 
 export const themes: Record<ThemeName, Theme> = {
   dark: {
     name: "dark",
-    bg: "#0d0d0f",
-    card: "#18181b",
-    raised: "#242427",
-    border: "#27272a",
-    text: "#fafafa",
-    muted: "#8b8b8f",
-    subtle: "#3f3f46",
-    accent: "#dc2626",
-    glow: "#ef4444",
-    heat: ["#1e1e20", "#4c1515", "#7f1d1d", "#b91c1c", "#ef4444"],
+    paper: "#121211",
+    ink: "#efede8",
+    muted: "#8d8a83",
+    faint: "#2b2a28",
+    red: "#ec3a22",
+    onRed: "#121211",
+    heat: ["#232321", "#4d4b47", "#8d8a83", "#efede8", "#ec3a22"],
   },
   light: {
     name: "light",
-    bg: "#ffffff",
-    card: "#fafafa",
-    raised: "#f4f4f5",
-    border: "#e4e4e7",
-    text: "#18181b",
-    muted: "#71717a",
-    subtle: "#d4d4d8",
-    accent: "#dc2626",
-    glow: "#b91c1c",
-    heat: ["#ebedf0", "#fecaca", "#f87171", "#dc2626", "#991b1b"],
+    paper: "#f3f1ec",
+    ink: "#151514",
+    muted: "#7a776f",
+    faint: "#dedad2",
+    red: "#e0301e",
+    onRed: "#f3f1ec",
+    heat: ["#e3dfd7", "#bdb8ae", "#86827a", "#151514", "#e0301e"],
   },
 };
 
