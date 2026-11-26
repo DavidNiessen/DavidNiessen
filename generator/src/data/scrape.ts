@@ -51,7 +51,7 @@ export async function fetchScraped(login = config.login): Promise<Omit<ProfileDa
   const repos = await soft(
     "rest repos",
     () =>
-      getJson<{ name: string; owner: { login: string }; description: string | null; html_url: string; stargazers_count: number; forks_count: number; fork: boolean; language: string | null }[]>(
+      getJson<{ name: string; owner: { login: string }; description: string | null; html_url: string; stargazers_count: number; forks_count: number; fork: boolean; language: string | null; created_at: string; pushed_at: string }[]>(
         `https://api.github.com/users/${login}/repos?per_page=100&sort=pushed`,
         githubHeaders(),
       ),
@@ -98,6 +98,16 @@ export async function fetchScraped(login = config.login): Promise<Omit<ProfileDa
         forks: r.forks_count,
         language: r.language ? { name: r.language, color: "" } : null,
       })),
+    repos: own.map((r) => ({
+      name: r.name,
+      description: r.description ?? "",
+      url: r.html_url,
+      stars: r.stargazers_count,
+      language: r.language ? { name: r.language, color: "" } : null,
+      createdAt: r.created_at,
+      pushedAt: r.pushed_at,
+    })),
+    yearTotals: { [localParts(new Date()).year]: sumYear(weeks, localParts(new Date()).year) },
     events: await soft("events", () => fetchEvents(login), []),
     commitHours: null,
   };

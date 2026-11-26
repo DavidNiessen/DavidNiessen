@@ -1,7 +1,7 @@
 import { config } from "../config.js";
 import { localParts } from "../lib/astro.js";
 import { getJson, githubHeaders, graphql, soft } from "./http.js";
-import type { ActivityEvent, ContributionDay, LanguageShare, ProfileData, Repo } from "./types.js";
+import type { ActivityEvent, ContributionDay, LanguageShare, ProfileData, Repo, RepoSummary } from "./types.js";
 
 const LEVELS: Record<string, ContributionDay["level"]> = {
   NONE: 0,
@@ -19,6 +19,7 @@ interface GqlRepo {
   forkCount: number;
   isArchived?: boolean;
   pushedAt?: string;
+  createdAt?: string;
   owner: { login: string };
   primaryLanguage: { name: string; color: string | null } | null;
   languages?: { edges: { size: number; node: { name: string; color: string | null } }[] };
@@ -48,7 +49,7 @@ interface MainQuery {
   };
 }
 
-const REPO_FIELDS = `name description url stargazerCount forkCount isArchived pushedAt owner{login} primaryLanguage{name color}`;
+const REPO_FIELDS = `name description url stargazerCount forkCount isArchived pushedAt createdAt owner{login} primaryLanguage{name color}`;
 
 const MAIN_QUERY = `query($login:String!){
   user(login:$login){
@@ -66,6 +67,18 @@ const MAIN_QUERY = `query($login:String!){
     pinnedItems(first:4, types:REPOSITORY){ nodes{ ... on Repository { ${REPO_FIELDS} } } }
   }
 }`;
+
+export function toSummary(r: GqlRepo): RepoSummary {
+  return {
+    name: r.name,
+    description: r.description ?? "",
+    url: r.url,
+    stars: r.stargazerCount,
+    language: r.primaryLanguage ? { name: r.primaryLanguage.name, color: r.primaryLanguage.color ?? "#8b8b8f" } : null,
+    createdAt: r.createdAt ?? "",
+    pushedAt: r.pushedAt ?? "",
+  };
+}
 
 function toRepo(r: GqlRepo): Repo {
   return {
@@ -226,6 +239,8 @@ export async function fetchGithub(login = config.login): Promise<Omit<ProfileDat
     },
     languages: aggregateLanguages(owned),
     projects,
+    repos: owned.map(toSummary),
+    yearTotals: years,
     events,
     commitHours,
   };

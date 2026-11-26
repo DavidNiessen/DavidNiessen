@@ -1,6 +1,7 @@
 import { config } from "../config.js";
 import { localParts } from "../lib/astro.js";
-import type { ContributionDay, ProfileData } from "./types.js";
+import { fixtureRepos } from "./fixtures/repos.js";
+import type { ContributionDay, ProfileData, Repo } from "./types.js";
 
 /** Small deterministic PRNG (mulberry32). */
 export function rng(seed: number): () => number {
@@ -62,37 +63,38 @@ export function mockData(now = new Date()): ProfileData {
     generatedAt: now.toISOString(),
     login: config.login,
     name: config.name,
-    createdAt: "2020-06-30T10:00:00Z",
+    createdAt: "2020-07-14T10:00:00Z",
     followers: 64,
     following: 31,
-    repoCount: 27,
+    repoCount: 50,
     weeks,
     lastYearTotal: total,
     yearTotal: weeks.flat().filter((d) => d.date.startsWith(`${year}-`)).reduce((a, d) => a + d.count, 0),
-    allTimeTotal: total * 3 + 412,
+    allTimeTotal: 412 + 368 + 905 + 1188 + 1374 + weeks.flat().filter((d) => d.date.startsWith(`${year}-`)).reduce((a, d) => a + d.count, 0),
     totals: { commits: Math.round(total * 0.7), pullRequests: 186, issues: 42, reviews: 233, stars: 128, forks: 19, privateContributions: 940 },
     languages: [
-      { name: "Kotlin", color: "#A97BFF", bytes: 1_840_000 },
-      { name: "TypeScript", color: "#3178c6", bytes: 960_000 },
-      { name: "Java", color: "#b07219", bytes: 610_000 },
-      { name: "HCL", color: "#844FBA", bytes: 140_000 },
-      { name: "Shell", color: "#89e051", bytes: 88_000 },
-      { name: "Dockerfile", color: "#384d54", bytes: 21_000 },
-      { name: "CSS", color: "#663399", bytes: 18_000 },
+      { name: "TypeScript", color: "#3178c6", bytes: 2_140_000 },
+      { name: "Java", color: "#b07219", bytes: 1_380_000 },
+      { name: "Kotlin", color: "#A97BFF", bytes: 1_090_000 },
+      { name: "JavaScript", color: "#f1e05a", bytes: 610_000 },
+      { name: "Python", color: "#3572A5", bytes: 420_000 },
+      { name: "C++", color: "#f34b7d", bytes: 310_000 },
+      { name: "Swift", color: "#F05138", bytes: 90_000 },
+      { name: "Shell", color: "#89e051", bytes: 40_000 },
     ],
-    projects: [
-      { name: "ktor-starter", owner: config.login, description: "Opinionated Kotlin service template with Ktor, Koin and Testcontainers.", url: "https://github.com/DavidNiessen", stars: 48, forks: 7, language: { name: "Kotlin", color: "#A97BFF" } },
-      { name: "kube-preview", owner: config.login, description: "Ephemeral preview environments on Kubernetes for every pull request.", url: "https://github.com/DavidNiessen", stars: 31, forks: 4, language: { name: "TypeScript", color: "#3178c6" } },
-      { name: "spring-outbox", owner: config.login, description: "Transactional outbox pattern for Spring Boot and MongoDB.", url: "https://github.com/DavidNiessen", stars: 22, forks: 3, language: { name: "Java", color: "#b07219" } },
-      { name: "e2e-lab", owner: config.login, description: "Playwright patterns for fast, flake-free end-to-end suites.", url: "https://github.com/DavidNiessen", stars: 15, forks: 2, language: { name: "TypeScript", color: "#3178c6" } },
-    ],
+    projects: [...fixtureRepos]
+      .sort((a, b) => b.stars - a.stars)
+      .slice(0, 4)
+      .map((r): Repo => ({ name: r.name, owner: config.login, description: r.description, url: r.url, stars: r.stars, forks: Math.floor(r.stars / 2), language: r.language })),
+    repos: fixtureRepos,
+    yearTotals: { 2021: 412, 2022: 368, 2023: 905, 2024: 1188, 2025: 1374, [year]: weeks.flat().filter((d) => d.date.startsWith(`${year}-`)).reduce((a, d) => a + d.count, 0) },
     events: [
-      { kind: "push", repo: "ktor-starter", detail: "3 commits → main", time: t(95) },
-      { kind: "merge", repo: "kube-preview", detail: "PR #42 merged", time: t(260) },
-      { kind: "review", repo: "spring-outbox", detail: "reviewed PR #17", time: t(410) },
-      { kind: "release", repo: "ktor-starter", detail: "released v2.4.0", time: t(900) },
-      { kind: "issue", repo: "e2e-lab", detail: "issue #9 opened", time: t(1500) },
-      { kind: "create", repo: "infra-playground", detail: "created repository", time: t(2900) },
+      { kind: "push", repo: "soundwave", detail: "3 commits → main", time: t(95) },
+      { kind: "merge", repo: "soundwave", detail: "PR #42 merged", time: t(260) },
+      { kind: "push", repo: "portfolio", detail: "1 commit → main", time: t(410) },
+      { kind: "release", repo: "lexicon-mcp", detail: "released v0.4.0", time: t(900) },
+      { kind: "review", repo: "afterlight-studio", detail: "reviewed PR #17", time: t(1500) },
+      { kind: "create", repo: "undusted", detail: "created branch godot-4.5", time: t(2900) },
       { kind: "star", repo: "kotlinx.coroutines", detail: "starred", time: t(4100) },
     ],
     commitHours: hours,

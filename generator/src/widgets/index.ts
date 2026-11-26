@@ -1,4 +1,8 @@
+import { board } from "./board.js";
 import { contrib } from "./contrib.js";
+import { journey } from "./journey.js";
+import { nowBuilding } from "./nowbuilding.js";
+import { projects } from "./projects.js";
 import { divider } from "./divider.js";
 import { pulse } from "./pulse.js";
 import { languages } from "./languages.js";
@@ -13,4 +17,4 @@ import { stats } from "./stats.js";
 import { terminal } from "./terminal.js";
 import type { Widget } from "./types.js";
 
-export const widgets: Widget[] = [hero, ...socials, divider, terminal, stats, contrib, pulse, snake, skyline, life, stack, languages, rhythm];
+export const widgets: Widget[] = [hero, ...socials, divider, terminal, stats, contrib, pulse, snake, skyline, life, stack, languages, rhythm, nowBuilding, journey, board, ...projects];

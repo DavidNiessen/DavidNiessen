@@ -17,6 +17,17 @@ export interface Repo {
   language: { name: string; color: string } | null;
 }
 
+export interface RepoSummary {
+  name: string;
+  description: string;
+  url: string;
+  stars: number;
+  language: { name: string; color: string } | null;
+  /** ISO timestamps */
+  createdAt: string;
+  pushedAt: string;
+}
+
 export interface LanguageShare {
   name: string;
   color: string;
@@ -70,6 +81,10 @@ export interface ProfileData {
   };
   languages: LanguageShare[];
   projects: Repo[];
+  /** owned, non-fork repositories (most recently pushed first) */
+  repos: RepoSummary[];
+  /** contributions per calendar year */
+  yearTotals: Record<number, number>;
   events: ActivityEvent[];
   /** commits per local hour 0..23, null if unavailable */
   commitHours: number[] | null;
