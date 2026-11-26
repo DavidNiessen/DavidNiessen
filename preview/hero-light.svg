@@ -66,11 +66,6 @@ text{font-family:JBMono, 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, 
 </g>
 <rect x="0.5" y="0.5" width="839" height="279" rx="16" stroke="#e4e4e7"/>
 
-<g class="in" style="animation-delay:.1s">
-  <rect x="48" y="40" width="148" height="24" rx="12" fill="#f4f4f5" stroke="#e4e4e7"/>
-  <circle cx="64" cy="52" r="4" fill="#22c55e"/><circle cx="64" cy="52" r="4" fill="#22c55e" class="loop" style="animation:pulse 1.6s ease-in-out infinite" filter="url(#glow)"/>
-  <text x="76" y="56.5" font-size="11.5" class="m">hello, world_</text>
-</g>
 
 <text x="48" y="122" font-size="56" class="name b" letter-spacing="-1">David Nießen</text>
 <g class="gl loop" clip-path="url(#sliceA)"><text x="48" y="122" font-size="56" class="b" fill="#dc2626" letter-spacing="-1">David Nießen</text></g>
